@@ -1,4 +1,4 @@
-// import { NavLink } from "react-router-dom";
+import useSWR from "swr";
 
 import CardTimeLine from "../components/CardTimeLine";
 import Footer from "../components/Footer";
@@ -8,7 +8,15 @@ import Search from "../components/Search";
 import SideNavbar from "../components/SideNavBar";
 import TrendCards from "../components/TrendCards";
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 const Home = () => {
+    const { data, error } = useSWR(
+        "https://api.thenewsapi.com/v1/news/top?api_token=ZPu927rAikF9eNSWOvKk9VjBv4tH0exMCrxVp0bI&locale=id&language=id&limit=2",
+        fetcher
+    );
+
+    console.log(data, error)
     return (
         <div className="bg-gray-900">
             <div className="flex" >
@@ -24,7 +32,7 @@ const Home = () => {
                 </div>
                 <div className="w-2/5 h-12 h-full">
                     <Search />
-                    <TrendCards />
+                    {data && <TrendCards data={data}/>}
                     <Footer />
                 </div>
             </div>

@@ -1,10 +1,11 @@
-const TrendItem = () => {
+const TrendItem = (prosp) => {
+    const {photo, }
     return (
         <>
             <div className="flex">
                 <div className="flex-1">
-                    <figure class="p-3">
-                        <img src="https://picsum.photos/id/1005/300/200" alt="berita" class="rounded-lg shadow-lg" />
+                    <figure className="p-3">
+                        <img src="https://picsum.photos/id/1005/300/200" alt="berita" className="rounded-lg shadow-lg" />
                     </figure>
                     <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">20 September 2021</p>
                     <h2 className="px-4 ml-2 w-48 font-bold text-white">Yakali pal pale pale pale pal</h2>
