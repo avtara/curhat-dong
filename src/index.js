@@ -17,7 +17,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path='/' component={Home}></Route>
-          <Route exact path='/detail' component={Detail} ></Route>
+          <Route exact path='/detail/:id' component={Detail} ></Route>
           <Route exact path='/login' component={Login} ></Route>
           <Route path='*' component={NotFound}></Route>
         </Switch>

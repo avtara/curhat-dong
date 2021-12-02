@@ -15,4 +15,22 @@ subscription MySubscription {
 }
 `;
 
-export { GETDataPost };
+const GETComment = gql`
+subscription getComment {
+  comment(where: {id_post: {_eq: 1}}, order_by: {id: desc}) {
+    user {
+      name
+      username
+      id
+      photo
+    }
+    comment
+    created_at
+  }
+}
+`;
+
+
+
+
+export { GETDataPost, GETComment };

@@ -1,6 +1,6 @@
 import CardTimeLine from "../components/CardTimeLine";
 import Footer from "../components/Footer";
-import FormInput from "../components/FormInput";
+import FormInput from "../components/FormAddPost";
 import Header from "../components/Header";
 import Search from "../components/Search";
 import SideNavbar from "../components/SideNavBar";
@@ -8,6 +8,7 @@ import TrendCards from "../components/TrendCards";
 import { GetApi } from "../libs/api";
 import useSubscribePost from "../hooks/useSubscribe";
 import { useHistory } from "react-router-dom";
+import FormAddPost from "../components/FormAddPost";
 
 
 
@@ -30,7 +31,7 @@ const Home = () => {
                 <SideNavbar />
                 <div className="w-3/5 border border-gray-600 h-full border-t-0">
                     <Header />
-                    <FormInput />
+                    <FormAddPost />
                     {content?.posting.map((v) => (
                         <CardTimeLine 
                         key={v.id}

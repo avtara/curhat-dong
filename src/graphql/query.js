@@ -10,3 +10,21 @@ export const LOGIN = gql`
         }
     }
 `;
+
+export const DETAIL_POST = gql`
+    query DetailPost($id_post: Int!) {
+        posting(where: {id: {_eq: $id_post}}) {
+            created_at
+            post
+            id
+            updated_at
+            user {
+                username
+                photo
+                name
+            }
+        }
+    }
+`;
+
+

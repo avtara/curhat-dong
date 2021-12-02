@@ -11,9 +11,9 @@ const Login = () => {
     const [err, setErr] = useState();
     const history = useHistory();
     const client = useApolloClient();
-    
+
     const is_login = sessionStorage.getItem('id');
-    if(is_login){
+    if (is_login) {
         history.push("/");
     }
 
