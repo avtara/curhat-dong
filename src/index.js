@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Home from './pages/Home';
+import NotFound from "./pages/NotFound";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Detail from './pages/Detail';
+import Login from './pages/Login';
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo/client";
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home}></Route>
+          <Route exact path='/detail/:id' component={Detail} ></Route>
+          <Route exact path='/login' component={Login} ></Route>
+          <Route path='*' component={NotFound}></Route>
+        </Switch>
+      </Router>
+    </React.StrictMode>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
