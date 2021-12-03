@@ -1,7 +1,6 @@
 // import { NavLink } from "react-router-dom";
 
-import { useApolloClient, useQuery, useSubscription } from "@apollo/client";
-import { useState } from "react";
+import { useQuery, useSubscription } from "@apollo/client";
 import { useHistory, useParams } from "react-router";
 import CardTimeLine from "../components/CardTimeLine";
 import Footer from "../components/Footer";
@@ -27,7 +26,9 @@ const Detail = () => {
     const { loading, error: err, data:dat } = useQuery(DETAIL_POST, {variables: {
         id_post: id
     }});
-    const { data: comment, error:errComment, loading:load } = useSubscription(GETComment);
+    const { data: comment} = useSubscription(GETComment, {variables: {
+        id_post: id
+    }});
     console.log(comment)
     if (!loading && (dat.posting.length === 0 || err)) {
         history.push("/");
@@ -62,7 +63,8 @@ const Detail = () => {
                         username={v.user.username}
                         photo={v.user.photo}
                         date={v.created_at}
-                        content={v.comment} />
+                        content={v.comment}
+                        id={v.id} />
                     ))}
                 </div>
                 <div className="w-2/5 h-12 h-full">

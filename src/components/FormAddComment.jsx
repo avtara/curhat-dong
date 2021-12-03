@@ -3,7 +3,7 @@ import { ADD_COMMENT } from "../graphql/mutation";
 
 const FormAddComment = (props) => {
     let input;
-    const [addPost, { data, loading, error }] = useMutation(ADD_COMMENT);
+    const [addPost] = useMutation(ADD_COMMENT);
     const { id } = props;
     return (
         <>

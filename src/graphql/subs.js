@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GETDataPost = gql`
-subscription MySubscription {
-  posting(order_by: {updated_at: desc}) {
+subscription MySubscription($keyword: bpchar!) {
+  posting(order_by: {updated_at: desc}, where: {post: {_iregex: $keyword}}) {
     user {
       username
       photo
@@ -16,8 +16,8 @@ subscription MySubscription {
 `;
 
 const GETComment = gql`
-subscription getComment {
-  comment(where: {id_post: {_eq: 1}}, order_by: {id: desc}) {
+subscription getComment($id_post: Int!) {
+  comment(where: {id_post: {_eq: $id_post}}, order_by: {id: desc}) {
     user {
       name
       username

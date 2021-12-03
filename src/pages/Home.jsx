@@ -1,20 +1,29 @@
 import CardTimeLine from "../components/CardTimeLine";
 import Footer from "../components/Footer";
-import FormInput from "../components/FormAddPost";
 import Header from "../components/Header";
 import Search from "../components/Search";
 import SideNavbar from "../components/SideNavBar";
 import TrendCards from "../components/TrendCards";
 import { GetApi } from "../libs/api";
-import useSubscribePost from "../hooks/useSubscribe";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import FormAddPost from "../components/FormAddPost";
+import { GETDataPost } from "../graphql/subs";
+import { useSubscription } from "@apollo/client";
+import React from "react";
 
-
+function useQuery() {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 const Home = () => {
     const { data, error } = GetApi();
-    const { data: content, loading, error: err } = useSubscribePost();
+    let query = useQuery();
+    console.log(query.get("keyword"))
+    const { data:content, loading } = useSubscription(GETDataPost,{variables: {
+        keyword: query.get("keyword") ? query.get("keyword") : ""
+    }});
+    console.log(content)
     const history = useHistory();
     const is_login = sessionStorage.getItem('id');
     if(!is_login){
@@ -39,7 +48,8 @@ const Home = () => {
                         username={v.user.username}
                         photo={v.user.photo}
                         date={v.updated_at}
-                        content={v.post} />
+                        content={v.post}
+                        id={v.id} />
                     ))}
 
                 </div>
